@@ -16,7 +16,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_NS', function (fqns) {
-		debugger;
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		var namespace = parts.join(".");
@@ -24,8 +23,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_NS_Path', function (fqns) {
-		debugger;
-		console.log("fqns",fqns.split("."))
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		var namespace = parts.join("/");
@@ -33,7 +30,6 @@ module.exports = function (plop) {
 	});
 
 	plop.addHelper('FQNS_to_Class', function (fqns) {
-		debugger;
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		return className
@@ -44,6 +40,13 @@ module.exports = function (plop) {
 		var parts = fqns.split(".");
 		var className = parts.pop();
 		var tag = className.replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
+		return tag
+	});
+
+	plop.addHelper('FQNS_to_NSTagName', function (fqns) {
+		// var parts = fqns.split(".");
+		// var className = parts.pop();
+		var tag = fqns.replace(/\./gm,"-").replace(/([a-zA-Z])(?=[A-Z0-9])/g, (f,m)=> `${m}-`).toLowerCase();
 		return tag
 	});
 
@@ -86,17 +89,17 @@ module.exports = function (plop) {
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.js',
-	            templateFile: 'framework/resources/generators/component/index.js.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/component/index.js.hbs'
 	        },
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.css',
-	            templateFile: 'framework/resources/generators/component/index.css.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/component/index.css.hbs'
 	        },
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.html',
-	            templateFile: 'framework/resources/generators/component/index.html.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/component/index.html.hbs'
 	        }
         ]  // array of actions
     });
@@ -130,22 +133,22 @@ module.exports = function (plop) {
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.js',
-	            templateFile: 'framework/resources/generators/application/index.js.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/application/index.js.hbs'
 	        },
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.css',
-	            templateFile: 'framework/resources/generators/application/index.css.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/application/index.css.hbs'
 	        },
 	        {
 	            type: 'add',
 	            path: 'src/{{FQNS_to_NS_Path namespace}}/{{FQNS_to_Class namespace}}/index.html',
-	            templateFile: 'framework/resources/generators/application/index.html.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/application/index.html.hbs'
 	        },
 	        {
 	            type: 'add',
 	            path: '{{FQNS_to_TagName namespace}}.html',
-	            templateFile: 'framework/resources/generators/application/default.html.hbs'
+	            templateFile: 'node_modules/od-plopgen-templates/generators/application/default.html.hbs'
 	        }
         ]  // array of actions
     });
